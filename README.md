@@ -1,5 +1,7 @@
 # EpubFixxr
 
+Releases are on the right! --> 
+
 All eBook actions, use the folder 01-input for their input directory unless otherwise noted.
 
 00-runfirst					Calibre, EpubCheck and Java are required. Run 00-runfirst.bat if you have not already
