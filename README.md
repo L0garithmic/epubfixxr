@@ -15,5 +15,5 @@ All eBook actions, use the folder 01-input for their input directory unless othe
 99-repair-only				Repairs any ePubs in calibre\to-fix. Outputs to 02-fixed
 
 If you wish to submit changes or fixes, I would love to see them! Just remember, my goal here was simple, clean scripts
-I am not particualarly looking for long drawn out fancy methods to do the same things I hacked together.
+I am not particularly  looking for long drawn out fancy methods to do the same things I hacked together.
 But, if you got something that saves some lines of code or does a better job, please submit a pull request!!
