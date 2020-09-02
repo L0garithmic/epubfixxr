@@ -2,7 +2,7 @@
 
 Releases are on the right! --> 
 
-ePubFixxr is a collection of tools meant to help identify broken eBooks, repair then, convert them and to optimize/shrink them. It is a work in progress, entirely batch files, uses Calibre, EpubCheck and Java. Is a work in progress. If you see changes needed, feel free to let me know.
+TL:DR | ePubFixxr is a collection of tools meant to help identify broken eBooks, repair then, convert them and to optimize/shrink them. It is a work in progress, entirely batch files, uses Calibre, EpubCheck and Java. If you see changes needed, feel free to let me know.
 
 * `00-runfirst`
   * Calibre, EpubCheck and Java are required. Run 00-runfirst.bat if you have not already
