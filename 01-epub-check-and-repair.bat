@@ -1,15 +1,21 @@
 @echo off
-rem goto :beginrepair
 
 :: Creates missing directories if necessary
 	if not exist "01-input" mkdir 01-input
 	if not exist "calibre\to-fix" mkdir calibre\to-fix
 	if exist "01-input\failed-check" call :moveoldfail
-	:: Checks 02-fixed for files before script runs, moves files if necessary
+	
+:: Checks 02-fixed for files before script runs, moves files if necessary
 	for /F %%i in ('dir /b /a "02-fixed\*"') do (call :02fmovefiles)
+	
+:: Checks 01-input for epubs before script runs, errors if none
+	for /F "delims=" %%a in ('dir /b /s "01-input\*.epub"') do (goto :epubyes)
+	goto :epubno
 
+	
 :: Begins the initial checks. Calls scripts to copy/move broken files if necessary
-for %%f in (01-input\*.epub) do (	
+:epubyes
+for /R "01-input" %%f in (*.epub) do (
 	set "loc=%%f"
 	setlocal enableDelayedExpansion
 		java -Xss1024k -jar epubcheck.jar "!loc!" --fatal >nul
@@ -22,10 +28,6 @@ for %%f in (01-input\*.epub) do (
 )
 
 
-:beginrepair
-:: this is a copy of above, delete after testing
-rem for /F %%i in ('dir /b /a "02-fixed\*"') do (call :02fmovefiles)
-
 :: Export folder contents to text files for comparison - Pre-test 1
 :exportdir
 	if not exist "calibre\to-fix" mkdir calibre\to-fix
@@ -35,6 +37,7 @@ rem for /F %%i in ('dir /b /a "02-fixed\*"') do (call :02fmovefiles)
 :: Checks if there are actually any files to repair - Pre-test 2 (if no, jumps to Step 4)
 	for /f %%i in ("xfailcheck.txt") do set size=%%~zi
 	if not %size% gtr 0 goto :checksgood
+	
 :: Starts the Repair process if
 	call :repairscript
 	goto :allchecks
@@ -68,7 +71,7 @@ rem for /F %%i in ('dir /b /a "02-fixed\*"') do (call :02fmovefiles)
 :: This is if the fix/repair directories are identical and/or empty. Success! - Step 4 (calls Cleanup)
 :checksgood
 	cls
-	echo All checks and/or repairs seem to of completed as intended with no obvious errors.
+	echo All checks and/or repairs seem to of completed as intended with no obvious errors. You're all set!
 	echo.
 	for /F %%i in ('dir /b /a "02-fixed\*"') do (call :repairlist)
 	echo.
@@ -122,9 +125,16 @@ for %%f in (calibre\to-fix\*.epub) do (
 	EXIT /B 0
 	
 :moveoldfail
-	:: Checks 01-input\failed-check for files before script runs, moves files if necessary
+:: Checks 01-input\failed-check for files before script runs, moves files if necessary
 	for /F %%i in ('dir /b /a "01-input\failed-check\*"') do (
 	if not exist "01-input\failed-check-old" mkdir 01-input\failed-check-old
 	move 01-input\failed-check\*.* 01-input\failed-check-old)
 	cls
 	EXIT /B 0
+	
+:epubno
+:: Errors if there are no ePubs in 01-input
+	cls
+	echo No ePubs exist in 01-input or any subfolders in said directory. Please put some in there!
+	pause
+	exit
