@@ -26,6 +26,7 @@ TL:DR | ePubFixxr is a collection of tools meant to help identify broken eBooks,
   
  
 All eBook actions, use the folder 01-input for their input directory unless otherwise noted.
+01-epub-check-and-repair can now check recursively through folders in 01-input. It is currently the only one that can
 
 If you wish to submit changes or fixes, I would love to see them! Just remember, my goal here was simple, clean scripts
 I am not particularly  looking for long drawn out fancy methods to do the same things I hacked together.
