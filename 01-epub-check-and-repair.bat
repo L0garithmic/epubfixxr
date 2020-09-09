@@ -28,6 +28,9 @@ for /R "01-input" %%f in (*.epub) do (
 )
 
 
+:: Checks if :exportdir is necessary to run
+	if not exist "01-input\failed-check" goto :checksgood
+	
 :: Export folder contents to text files for comparison - Pre-test 1
 :exportdir
 	if not exist "calibre\to-fix" mkdir calibre\to-fix
@@ -70,7 +73,7 @@ for /R "01-input" %%f in (*.epub) do (
 
 :: This is if the fix/repair directories are identical and/or empty. Success! - Step 4 (calls Cleanup)
 :checksgood
-	cls
+	echo.
 	echo All checks and/or repairs seem to of completed as intended with no obvious errors. You're all set!
 	echo.
 	for /F %%i in ('dir /b /a "02-fixed\*"') do (call :repairlist)
@@ -106,9 +109,9 @@ for %%f in (calibre\to-fix\*.epub) do (
 	
 :cleanup
 :: Deletes files in the to-fix folder (only called)
-	del /s /q calibre\to-fix\*.* >NUL
-	del xfixed.txt >NUL
-	del xfailcheck.txt >NUL
+	del /s /q calibre\to-fix\*.* 2>NUL
+	del xfixed.txt 2>NUL
+	del xfailcheck.txt 2>NUL
 	EXIT /B 0
 	
 :: Normal File, Nothing to fix. (only called)
