@@ -1,4 +1,4 @@
-# EpubFixxr
+# ePubFixxr
 
 Releases are on the right! --> 
 
