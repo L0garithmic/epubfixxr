@@ -5,7 +5,7 @@
 
 for %%f in (01-input\*.pdf) do (
 ::This is the initial conversion of PDF to ePub, but it makes a fugly TOC at the end of the file. So...  the other steps remove that,
-	calibre\ebook-convert "%%f" "calibre\temp\%%~nf.epub" --output-profile tablet --chapter --preserve-cover-aspect-ratio --no-default-epub-cover
+	calibre\ebook-convert "%%f" "calibre\temp\%%~nf.epub" --output-profile tablet --no-default-epub-cover --no-svg-cover
 
 ::Decompresses the newly created ePub
 	for %%E in (calibre\temp\*.epub) do (7z.exe x "%%E" -aoa -o"%cd%\calibre\temp\%%~nE")
@@ -25,7 +25,7 @@ for %%f in (01-input\*.pdf) do (
 
 ::Converts the ePub so it passes checks via calibre
 	for %%G in (calibre\temp\*.epub) do (	
-		calibre\ebook-convert "%%G" "03-converted\%%~nG.epub" --output-profile tablet --chapter --preserve-cover-aspect-ratio --no-default-epub-cover
+		calibre\ebook-convert "%%G" "03-converted\%%~nG.epub" --output-profile tablet --no-default-epub-cover --no-svg-cover
 		del /F "%%G"
 	)
 	
