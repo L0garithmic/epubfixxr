@@ -40,13 +40,13 @@ for %%f in (01-input\*.epub) do (
 	xcopy /s /i /q /y "%cmp%\rootimg" "%cmpd%\%%~nf"
 
 	::Compresses the books not a finished output
-	7z.exe a "%cmpd%\%%~nf.epub" "%cmpd%\%%~nf" -mx5
+	7z.exe a "%cmpd%\%%~nf.epub" "%cmpd%\%%~nf\*" -mx5
 	
 	::Copies the books to Calibre to finalize
 	xcopy /s /i /q /y "%cmpd%\%%~nf.epub" "calibre\to-fix"
 
 	
-		for %%f in (calibre\to-fix\*.epub) do (	
+	for %%f in (calibre\to-fix\*.epub) do (	
 			if not exist "04-shrunk" mkdir 04-shrunk
 			calibre\ebook-convert "%%f" "04-shrunk\%%~nf.epub" --output-profile tablet --no-default-epub-cover --no-svg-cover
 		)
