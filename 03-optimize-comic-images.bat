@@ -12,7 +12,7 @@ for %%f in (01-input\*.cb*) do (
 	if not exist "comp\decompress" mkdir comp\decompress
 
 	::Decompress the ePub
-	7z.exe e "%%f" -aoa -o"%cmpd%\%%~nf"
+	7z.exe x "%%f" -o"%cmpd%\%%~nf"
 	cls
 
 	::Optimizing the images
