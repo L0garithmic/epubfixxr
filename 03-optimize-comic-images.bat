@@ -12,7 +12,7 @@ for %%f in (01-input\*.cb*) do (
 	if not exist "comp\decompress" mkdir comp\decompress
 
 	::Decompress the ePub
-	7z.exe x "%%f" -o"%cmpd%\%%~nf"
+	7z.exe e "%%f" -o"%cmpd%\%%~nf"
 	cls
 
 	::Optimizing the images
@@ -27,10 +27,10 @@ for %%f in (01-input\*.cb*) do (
 	::Removes any empty directories
 	ROBOCOPY "%cmpd%\%%~nf" "%cmpd%\%%~nf" /S /MOVE >NUL
 
-	::Compresses the books not a finished output
+	::Compresses the books
 	7z.exe a "%cmpd%\%%~nf.cbz" "%cd%\comp\decompress\%%~nf" -mx0 -mmt2 -tzip
 	
-	::Copies the books to Calibre to finalize
+	::Copies the books to "Shrunk"
 	xcopy /s /i /q /y "%cmpd%\%%~nf.cbz" "04-shrunk"
 
 	rmdir /Q /S comp
