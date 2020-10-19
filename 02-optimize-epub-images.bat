@@ -20,16 +20,16 @@ for %%f in (01-input\*.epub) do (
 	
 	::Optimizing the images
 	echo Optimizing the images, this can be VERY slow. Be patient.
-		for %%g in ("%cmpd%\%%~nf\OEBPS\images\*.jpg") do (
+		for %%g in ("%cmpd%\%%~nf\OEBPS\images\*.jp*g") do (
 			cjpeg -quality 80 "%%g" > comp/OEBPS/images/%%~nxg
 		)
-		for %%g in ("%cmpd%\%%~nf\OPS\images\*.jpg") do (
+		for %%g in ("%cmpd%\%%~nf\OPS\images\*.jp*g") do (
 			cjpeg -quality 80 "%%g" > comp/OPS/images/%%~nxg
 		)
-		for %%g in ("%cmpd%\%%~nf\images\*.jpg") do (
+		for %%g in ("%cmpd%\%%~nf\images\*.jp*g") do (
 			cjpeg -quality 80 "%%g" > comp/images/%%~nxg
 		)
-		for %%g in ("%cmpd%\%%~nf\index*.jpg") do (
+		for %%g in ("%cmpd%\%%~nf\index*.jp*g") do (
 			cjpeg -quality 80 "%%g" > comp/rootimg/%%~nxg
 		)
 	
