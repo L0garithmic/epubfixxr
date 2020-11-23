@@ -1,5 +1,7 @@
 # ePubFixxr
 
+Edit: Actually working on an entire rebuild, far simpler with more features. No ETA. Use this one for now
+
 Releases are on the right! --> 
 
 TL:DR | ePubFixxr is a collection of tools meant to help identify broken eBooks, repair them, convert them, optimize/shrink them (new >) sort them, rename them. It is a work in progress, entirely batch files, uses Calibre, EpubCheck and Java. If you see changes needed, feel free to let me know.
